@@ -1,15 +1,16 @@
 import type { CreditCard } from 'visa-client';
 import { useState } from 'react';
-import { createVirtualCardAdapter } from './VirtualCardAdapter';
 import { createVirtualCardModel } from './VirtualCardPageService';
+import { useVirtualCardAdapterFactory } from './VirtualCardProvider';
 
 /* Orchestrator hook to provide model for the view */
 export const useCreateVirtualCard = () => {
     const [card, setCard] = useState<CreditCard>();
+    const virtualCardFactory = useVirtualCardAdapterFactory();
+    const createVirtualCreditCard = virtualCardFactory();
 
     const createCard = async () => {
-        const createVirtualCreditCard = createVirtualCardAdapter();
-        const virtualCard: CreditCard = await createVirtualCreditCard();
+        const virtualCard = await createVirtualCreditCard();
 
         setCard(virtualCard);
     };

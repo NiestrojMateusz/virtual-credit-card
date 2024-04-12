@@ -13,7 +13,7 @@ module.exports = cypress.defineConfig({
         runMode: 1,
         openMode: 0,
     },
-    // blockHosts: ['!*localhost*'],
+    blockHosts: ['!*localhost*'],
     e2e: {
         baseUrl: 'http://localhost:5173',
         setupNodeEvents(on) {
