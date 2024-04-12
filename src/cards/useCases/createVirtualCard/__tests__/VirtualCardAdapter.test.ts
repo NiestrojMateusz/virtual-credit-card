@@ -6,7 +6,7 @@ describe('VirtualCardAdapter', () => {
     it('returns card', async () => {
         const card: CreditCard = {
             id: 1234567890111213,
-            holder: 'Nik Sumeiko',
+            holder: 'Matt NJ',
             expiry: new Date('2025-05-21T15:27:03.885Z'),
             cvc: 123,
             color: 'red',

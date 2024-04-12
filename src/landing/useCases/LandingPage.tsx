@@ -1,5 +1,5 @@
-import { FocusPageLayout, HeroTitle, MainMenu } from '../../design-system';
 import { Link } from 'react-router-dom';
+import { FocusPageLayout, HeroTitle, MainMenu } from '../../design-system';
 
 export const LandingPage = () => {
     return (
