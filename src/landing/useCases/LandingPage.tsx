@@ -16,6 +16,9 @@ export const LandingPage = () => {
                     <Link to="/virtual-card">Virtual card</Link>
                 </MainMenu.Item>
                 <MainMenu.Item>
+                    <Link to="/iban-validation">Iban validation</Link>
+                </MainMenu.Item>
+                <MainMenu.Item>
                     <Link to="/wip">Portfolio</Link>
                 </MainMenu.Item>
                 <MainMenu.Item>

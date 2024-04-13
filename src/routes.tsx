@@ -20,6 +20,10 @@ export const routes = [
         ),
     },
     {
+        path: '/iban-validation',
+        element: <div>IBAN validation</div>,
+    },
+    {
         path: '/wip',
         element: (
             <FocusPageLayout>
