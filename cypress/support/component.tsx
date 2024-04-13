@@ -9,6 +9,7 @@ import type { RouteObject } from 'react-router-dom';
 import { createHashRouter } from 'react-router-dom';
 import type { MountReturn } from 'cypress/react18';
 import { mount } from 'cypress/react18';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import '../../src/index.css';
 import './commands';
@@ -22,6 +23,8 @@ Cypress.Commands.overwriteQuery('url', () => {
 });
 
 Cypress.Commands.add('mount', (element, path, options, rerenderKey) => {
+    const queryClient = new QueryClient();
+
     const createRouter = (routes: RouteObject[]) => createHashRouter(routes);
 
     return cy
@@ -34,8 +37,12 @@ Cypress.Commands.add('mount', (element, path, options, rerenderKey) => {
         .then(() =>
             mount(
                 <React.StrictMode>
-                    {element}
-                    {/* {React.cloneElement(element, { createRouter })} */}
+                    {/* <QueryClientProvider client={queryClient}> */}
+                    {/*     {element} */}
+                    {/* </QueryClientProvider> */}
+                    <QueryClientProvider client={queryClient}>
+                        {React.cloneElement(element, { createRouter })}
+                    </QueryClientProvider>
                 </React.StrictMode>,
                 options,
                 rerenderKey,
