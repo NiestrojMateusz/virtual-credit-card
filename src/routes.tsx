@@ -4,6 +4,7 @@ import { VirtualCardPage } from './cards/useCases/createVirtualCard/VirtualCardP
 import { ContextProvider } from './common/context';
 import { provideVirtualCard } from './cards/useCases/createVirtualCard/VirtualCardProvider';
 import { createVirtualCardAdapter } from './cards/useCases/createVirtualCard/VirtualCardAdapter';
+import { ValidateIbanPage } from './iban/useCases/validateIban/ValidateIbanPage';
 
 export const routes = [
     {
@@ -21,7 +22,7 @@ export const routes = [
     },
     {
         path: '/iban-validation',
-        element: <div>IBAN validation</div>,
+        element: <ValidateIbanPage />,
     },
     {
         path: '/wip',
