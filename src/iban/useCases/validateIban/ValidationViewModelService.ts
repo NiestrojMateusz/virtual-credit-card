@@ -17,7 +17,7 @@ export const getIbanValidationViewModel = (
     const validationError = error ? 'This IBAN is invalid' : undefined;
 
     if (!validation) {
-        return { isValidationAvailable: false, data: [] };
+        return { isValidationAvailable: false, data: [], errorMessage: validationError };
     }
 
     const data = ['Valid IBAN'];

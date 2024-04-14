@@ -6,35 +6,24 @@ import {
     PositiveList,
     TextInput,
 } from '@design-system';
-import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { MagnifyingGlassIcon } from '../../../design-system/components/icons';
-import { createIbanValidationApiAdapter } from '../../api/ValidationApiService';
-import { getIbanValidationViewModel } from './ValidationViewModelService';
+import { useIbanValidation } from './useIbanValidation';
 
 export const ValidateIbanPage = () => {
-    const [formValues, setFormValues] = useState({ iban: '' });
-    const [iban, setIban] = useState(formValues.iban);
-    const { data, error } = useQuery({
-        queryKey: ['validation', iban],
-        queryFn: createIbanValidationApiAdapter(iban),
-        enabled: Boolean(iban),
-        retry: false,
-    });
-
-    const ibanValidationModel = getIbanValidationViewModel(data, error);
+    const {
+        onIbanValidationSubmit,
+        onIbanChange,
+        validationError,
+        isValidationAvailable,
+        validationResults,
+    } = useIbanValidation();
 
     return (
         <FocusPageLayout>
             <HeroTitle title="IBAN Validator" />
-            <form
-                onSubmit={(event) => {
-                    setIban(formValues.iban);
-                    event.preventDefault();
-                }}
-            >
+            <form onSubmit={onIbanValidationSubmit}>
                 <FormField
-                    error={ibanValidationModel.errorMessage}
+                    error={validationError}
                     button={
                         <Button type="submit">
                             <MagnifyingGlassIcon />
@@ -44,13 +33,11 @@ export const ValidateIbanPage = () => {
                     <TextInput
                         data-test="iban-entry"
                         placeholder="Type IBAN..."
-                        onChange={(event) => setFormValues({ iban: event.target.value })}
+                        onChange={onIbanChange}
                     />
                 </FormField>
             </form>
-            {ibanValidationModel.isValidationAvailable && (
-                <PositiveList items={ibanValidationModel.data} />
-            )}
+            {isValidationAvailable && <PositiveList items={validationResults} />}
         </FocusPageLayout>
     );
 };
