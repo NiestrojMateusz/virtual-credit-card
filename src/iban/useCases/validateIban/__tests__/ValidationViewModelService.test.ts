@@ -30,7 +30,7 @@ describe('validation view model retrieval', () => {
 
             const result = getIbanValidationViewModel(ibanValidationDTOStub);
 
-            expect(result.data).toBe(false);
+            expect(result.data).toStrictEqual([]);
         });
     });
 });
