@@ -70,5 +70,16 @@ describe('validation view model retrieval', () => {
 
             expect(result.data).toContain('Accepts instant payments');
         });
+
+        it('return results when iban has positive operation history', () => {
+            const ibanValidationDTOStub = {
+                iban: VALID_IBAN_STUB,
+                flags: ['POSITIVE_HISTORY'],
+            } satisfies ValidationResponse;
+
+            const result = getIbanValidationViewModel(ibanValidationDTOStub);
+
+            expect(result.data).toContain('Positive operation history');
+        });
     });
 });
