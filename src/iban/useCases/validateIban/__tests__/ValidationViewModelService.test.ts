@@ -120,5 +120,16 @@ describe('validation view model retrieval', () => {
 
             expect(result.errorMessage).toBe('This IBAN is invalid');
         });
+
+        it('returns undefined when iban is valid', () => {
+            const ibanValidationDTOStub = {
+                iban: VALID_IBAN_STUB,
+                flags: [],
+            } satisfies ValidationResponse;
+
+            const result = getIbanValidationViewModel(ibanValidationDTOStub);
+
+            expect(result.errorMessage).toBeFalsy();
+        });
     });
 });
