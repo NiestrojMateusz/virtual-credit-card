@@ -47,7 +47,9 @@ export const ValidateIbanPage = () => {
                     />
                 </FormField>
             </form>
-            {ibanValidationModel.isValidationAvailable && <PositiveList items={[]} />}
+            {ibanValidationModel.isValidationAvailable && (
+                <PositiveList items={ibanValidationModel.data} />
+            )}
         </FocusPageLayout>
     );
 };

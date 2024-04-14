@@ -102,7 +102,7 @@ describe('validation view model retrieval', () => {
             const result = getIbanValidationViewModel(ibanValidationDTOStub);
 
             expect(result.data).toContain(
-                'Complies with Payment Services Directive PSD2',
+                'Complies with Payment Services Directive (PSD2)',
             );
         });
     });

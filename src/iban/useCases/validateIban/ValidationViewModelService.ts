@@ -36,7 +36,7 @@ export const getIbanValidationViewModel = (
     }
 
     if (flags.includes('PSD2')) {
-        data.push('Complies with Payment Services Directive PSD2');
+        data.push('Complies with Payment Services Directive (PSD2)');
     }
 
     return { isValidationAvailable: true, data };
