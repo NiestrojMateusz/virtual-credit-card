@@ -25,4 +25,17 @@ describe('Api adapter factory', () => {
             },
         });
     });
+
+    it('throws Error when request fails', async () => {
+        const ibanStub = 'AT0309000000000019176655';
+        const spy = vi.fn().mockResolvedValue({
+            ok: false,
+            status: 500,
+            json: () => 'Request failed with status code: 500',
+        });
+        const validateIban = createIbanValidationApiAdapter(ibanStub, { request: spy });
+        await expect(validateIban()).rejects.toThrowError(
+            'Request failed with status code: 500',
+        );
+    });
 });

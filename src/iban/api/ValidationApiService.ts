@@ -22,6 +22,11 @@ export const createIbanValidationApiAdapter = (
                 Content_Type: 'application/json',
             },
         });
+
+        if (!response.ok) {
+            throw new Error(`Request failed with status code: ${response.status}`);
+        }
+
         const data = await response.json();
         return data;
     };
