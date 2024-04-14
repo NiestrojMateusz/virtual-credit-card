@@ -32,5 +32,16 @@ describe('validation view model retrieval', () => {
 
             expect(result.data).toStrictEqual([]);
         });
+
+        it('return results when validation is available', () => {
+            const ibanValidationDTOStub = {
+                iban: 'AT0309000000000019176655',
+                flags: [],
+            } satisfies ValidationResponse;
+
+            const result = getIbanValidationViewModel(ibanValidationDTOStub);
+
+            expect(result.data).toEqual(['Valid IBAN']);
+        });
     });
 });
