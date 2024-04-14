@@ -12,15 +12,9 @@ const hasTrustedBank = (validation: ValidationResponse) => {
 
 export const getIbanValidationViewModel = (
     validation: ValidationResponse | undefined,
-    error?: Error | null,
+    error?: unknown,
 ): ValidationIbanViewModel => {
-    if (error) {
-        return {
-            isValidationAvailable: false,
-            data: [],
-            errorMessage: 'This IBAN is invalid',
-        };
-    }
+    const validationError = error ? 'This IBAN is invalid' : undefined;
 
     if (!validation) {
         return { isValidationAvailable: false, data: [] };
@@ -49,5 +43,5 @@ export const getIbanValidationViewModel = (
         data.push('Complies with Payment Services Directive (PSD2)');
     }
 
-    return { isValidationAvailable: true, data };
+    return { isValidationAvailable: true, data, errorMessage: validationError };
 };
