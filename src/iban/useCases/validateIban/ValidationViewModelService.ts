@@ -22,5 +22,9 @@ export const getIbanValidationViewModel = (
         data.push('Trusted bank');
     }
 
+    if (validation.flags.includes('INSTANT')) {
+        data.push('Accepts instant payments');
+    }
+
     return { isValidationAvailable: true, data };
 };
