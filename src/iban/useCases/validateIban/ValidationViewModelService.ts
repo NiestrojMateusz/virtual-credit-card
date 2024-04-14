@@ -17,24 +17,25 @@ export const getIbanValidationViewModel = (
     }
 
     const data = ['Valid IBAN'];
+    const { flags } = validation;
 
     if (hasTrustedBank(validation)) {
         data.push('Trusted bank');
     }
 
-    if (validation.flags.includes('INSTANT')) {
+    if (flags.includes('INSTANT')) {
         data.push('Accepts instant payments');
     }
 
-    if (validation.flags.includes('POSITIVE_HISTORY')) {
+    if (flags.includes('POSITIVE_HISTORY')) {
         data.push('Positive operation history');
     }
 
-    if (!validation.flags.includes('SECURITY_CLAIMS')) {
+    if (!flags.includes('SECURITY_CLAIMS')) {
         data.push('No security claims');
     }
 
-    if (validation.flags.includes('PSD2')) {
+    if (flags.includes('PSD2')) {
         data.push('Complies with Payment Services Directive PSD2');
     }
 
