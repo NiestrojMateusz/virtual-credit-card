@@ -3,6 +3,7 @@ import type { ValidationResponse } from '../../api/ValidationApiService';
 export type ValidationIbanViewModel = {
     isValidationAvailable?: boolean;
     data: string[];
+    errorMessage?: string;
 };
 
 const hasTrustedBank = (validation: ValidationResponse) => {
@@ -11,7 +12,16 @@ const hasTrustedBank = (validation: ValidationResponse) => {
 
 export const getIbanValidationViewModel = (
     validation: ValidationResponse | undefined,
+    error?: Error | null,
 ): ValidationIbanViewModel => {
+    if (error) {
+        return {
+            isValidationAvailable: false,
+            data: [],
+            errorMessage: 'This IBAN is invalid',
+        };
+    }
+
     if (!validation) {
         return { isValidationAvailable: false, data: [] };
     }

@@ -118,7 +118,7 @@ describe('validation view model retrieval', () => {
 
             const result = getIbanValidationViewModel(ibanValidationDTOStub, error);
 
-            expect(result.errorMessage).toBe('The IBAN is invalid');
+            expect(result.errorMessage).toBe('This IBAN is invalid');
         });
     });
 });

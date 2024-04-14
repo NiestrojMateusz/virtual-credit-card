@@ -15,14 +15,14 @@ import { getIbanValidationViewModel } from './ValidationViewModelService';
 export const ValidateIbanPage = () => {
     const [formValues, setFormValues] = useState({ iban: '' });
     const [iban, setIban] = useState(formValues.iban);
-    const { data } = useQuery({
+    const { data, error } = useQuery({
         queryKey: ['validation', iban],
         queryFn: createIbanValidationApiAdapter(iban),
         enabled: Boolean(iban),
         retry: false,
     });
 
-    const ibanValidationModel = getIbanValidationViewModel(data);
+    const ibanValidationModel = getIbanValidationViewModel(data, error);
 
     return (
         <FocusPageLayout>
@@ -34,6 +34,7 @@ export const ValidateIbanPage = () => {
                 }}
             >
                 <FormField
+                    error={ibanValidationModel.errorMessage}
                     button={
                         <Button type="submit">
                             <MagnifyingGlassIcon />
