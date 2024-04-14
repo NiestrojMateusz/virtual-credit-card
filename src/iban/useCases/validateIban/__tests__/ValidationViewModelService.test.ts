@@ -43,7 +43,7 @@ describe('validation view model retrieval', () => {
 
             const result = getIbanValidationViewModel(ibanValidationDTOStub);
 
-            expect(result.data).toEqual(['Valid IBAN']);
+            expect(result.data).toContain('Valid IBAN');
         });
 
         it('return results when iban belongs to trusted bank', () => {
@@ -80,6 +80,17 @@ describe('validation view model retrieval', () => {
             const result = getIbanValidationViewModel(ibanValidationDTOStub);
 
             expect(result.data).toContain('Positive operation history');
+        });
+
+        it('return results when no security claims', () => {
+            const ibanValidationDTOStub = {
+                iban: VALID_IBAN_STUB,
+                flags: [],
+            } satisfies ValidationResponse;
+
+            const result = getIbanValidationViewModel(ibanValidationDTOStub);
+
+            expect(result.data).toContain('No security claims');
         });
     });
 });

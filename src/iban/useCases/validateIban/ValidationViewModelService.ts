@@ -30,5 +30,9 @@ export const getIbanValidationViewModel = (
         data.push('Positive operation history');
     }
 
+    if (!validation.flags.includes('SECURITY_CLAIMS')) {
+        data.push('No security claims');
+    }
+
     return { isValidationAvailable: true, data };
 };
