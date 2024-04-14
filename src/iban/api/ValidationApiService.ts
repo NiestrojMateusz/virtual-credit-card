@@ -19,7 +19,7 @@ export const createIbanValidationApiAdapter = (
     return async (): Promise<ValidationResponse> => {
         const response = await request(`http://localhost:9000/validate?iban=${iban}`, {
             headers: {
-                Content_Type: 'application/json',
+                'Content-type': 'application/json',
             },
         });
 
