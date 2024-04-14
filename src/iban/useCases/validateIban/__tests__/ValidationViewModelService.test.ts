@@ -59,5 +59,16 @@ describe('validation view model retrieval', () => {
 
             expect(result.data).toContain('Trusted bank');
         });
+
+        it('return results when iban allows to instant payments', () => {
+            const ibanValidationDTOStub = {
+                iban: VALID_IBAN_STUB,
+                flags: ['INSTANT'],
+            } satisfies ValidationResponse;
+
+            const result = getIbanValidationViewModel(ibanValidationDTOStub);
+
+            expect(result.data).toContain('Accepts instant payments');
+        });
     });
 });
