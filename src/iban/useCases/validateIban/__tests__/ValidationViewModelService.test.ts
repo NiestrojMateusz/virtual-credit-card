@@ -92,5 +92,18 @@ describe('validation view model retrieval', () => {
 
             expect(result.data).toContain('No security claims');
         });
+
+        it('return results when iban complied with PSD2', () => {
+            const ibanValidationDTOStub = {
+                iban: VALID_IBAN_STUB,
+                flags: ['PSD2'],
+            } satisfies ValidationResponse;
+
+            const result = getIbanValidationViewModel(ibanValidationDTOStub);
+
+            expect(result.data).toContain(
+                'Complies with Payment Services Directive PSD2',
+            );
+        });
     });
 });

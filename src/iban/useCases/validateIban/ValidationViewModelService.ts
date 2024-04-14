@@ -34,5 +34,9 @@ export const getIbanValidationViewModel = (
         data.push('No security claims');
     }
 
+    if (validation.flags.includes('PSD2')) {
+        data.push('Complies with Payment Services Directive PSD2');
+    }
+
     return { isValidationAvailable: true, data };
 };
