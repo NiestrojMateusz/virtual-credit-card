@@ -128,3 +128,99 @@ Provide the user with feedback when the IBAN is missing.
 
     Acceptance criteria
     1. Display validation message when IBAN is missing
+![img_4.png](img_4.png)
+
+7. Overview
+   Enable the user to see the bank IBAN belongs to.
+
+Acceptance criteria
+1. Display bank details
+- Join bank.name and bank.address using , (comma) separator
+- Join bank address parts using , (comma)
+- Join city and zip using   (space)
+
+(Consider the bank.name and all address details are optional API response attributes)
+
+Example:
+
+Erste Bank, Am Belvedere 1, 1100 Vienna, AT
+^name       ^street         ^zip ^city   ^country
+
+
+Design
+API specification
+The validation is created via GET /validate endpoint.
+
+Expected request:
+
+Attribute	Type
+iban	string
+Response:
+
+Attribute	Type
+iban	string
+flags	enum[]
+INSTANT | POSITIVE_HISTORY | SECURITY_CLAIMS | PSD2
+bank?.trustScore?	number(0-10)
+bank?.name?	string
+bank?.address?.street?	string
+bank?.address?.city?	string
+bank?.address?.zip?	string
+bank?.address?.country?	ISO2(string)
+Test data
+- HU14116000060000000084586199
+- HR8523300033203674306
+
+8. Overview
+   Enable the user to see which currency the IBAN supports.
+
+Acceptance criteria
+1. Display the currency underneath formatted IBAN
+
+
+Design
+Image
+
+SDK specification
+Employ @partner/super-countries JavaScript SDK (from our partner) to retrieve the currency.
+
+Usage:
+```
+import { findCountryByIso2Code } from '@partner/super-countries';
+
+const { currency } = await findCountryByIso2Code('AT');
+
+Result:
+
+{
+"code": "EUR",
+"name": "Euro",
+"symbol": "€"
+}
+```
+ℹ Consume country code (e.g., AT) from the bank.address.country attribute in the validation API response.
+
+
+API specification
+The validation is created via POST /validate endpoint.
+
+Expected request:
+
+Attribute	Type
+iban	string
+Response:
+
+Attribute	Type
+iban	string
+flags	enum[]
+INSTANT | POSITIVE_HISTORY | SECURITY_CLAIMS | PSD2
+bank?.trustScore?	number(0-10)
+bank?.name?	string
+bank?.address?.street?	string
+bank?.address?.city?	string
+bank?.address?.zip?	string
+bank?.address?.country?	ISO2(string)
+Test data
+- AT0309000000000019176655
+- GB29NWBK60161331926819
+- SA3245000000001123456001
