@@ -26,5 +26,9 @@ export const getIbanValidationViewModel = (
         data.push('Accepts instant payments');
     }
 
+    if (validation.flags.includes('POSITIVE_HISTORY')) {
+        data.push('Positive operation history');
+    }
+
     return { isValidationAvailable: true, data };
 };
