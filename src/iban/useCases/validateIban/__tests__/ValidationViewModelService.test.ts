@@ -2,6 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { getIbanValidationViewModel } from '../ValidationViewModelService';
 import type { ValidationResponse } from '../../../api/ValidationApiService';
 
+const VALID_IBAN_STUB = 'AT0309000000000019176655';
+
 describe('validation view model retrieval', () => {
     describe('validated data availability', () => {
         it('return availability when validation data unavailable', () => {
@@ -14,7 +16,7 @@ describe('validation view model retrieval', () => {
 
         it('return availability when validation data available', () => {
             const ibanValidationDTOStub = {
-                iban: 'AT0309000000000019176655',
+                iban: VALID_IBAN_STUB,
                 flags: ['INSTANT'],
             } satisfies ValidationResponse;
 
@@ -35,7 +37,7 @@ describe('validation view model retrieval', () => {
 
         it('return results when validation is available', () => {
             const ibanValidationDTOStub = {
-                iban: 'AT0309000000000019176655',
+                iban: VALID_IBAN_STUB,
                 flags: [],
             } satisfies ValidationResponse;
 
@@ -46,7 +48,7 @@ describe('validation view model retrieval', () => {
 
         it('return results when iban belongs to trusted bank', () => {
             const ibanValidationDTOStub = {
-                iban: 'AT0309000000000019176655',
+                iban: VALID_IBAN_STUB,
                 flags: [],
                 bank: {
                     trustScore: 8,
