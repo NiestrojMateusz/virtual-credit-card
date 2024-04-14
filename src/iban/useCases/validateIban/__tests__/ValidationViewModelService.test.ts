@@ -106,4 +106,19 @@ describe('validation view model retrieval', () => {
             );
         });
     });
+
+    describe('validation error', () => {
+        it('returns error message when iban is invalid', () => {
+            const ibanValidationDTOStub = {
+                iban: 'invalid input',
+                flags: [],
+            } satisfies ValidationResponse;
+
+            const error = new Error();
+
+            const result = getIbanValidationViewModel(ibanValidationDTOStub, error);
+
+            expect(result.errorMessage).toBe('The IBAN is invalid');
+        });
+    });
 });
