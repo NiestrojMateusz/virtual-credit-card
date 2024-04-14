@@ -16,7 +16,8 @@ export const useIbanValidation = () => {
     } = getIbanValidationViewModel(data, error);
 
     const onIbanValidationSubmit = (event: React.FormEvent) => {
-        setIban(formValues.iban);
+        const ibanWithoutFormatting = formValues.iban.replaceAll(' ', '');
+        setIban(ibanWithoutFormatting);
         event.preventDefault();
     };
 
