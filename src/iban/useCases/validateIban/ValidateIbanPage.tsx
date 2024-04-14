@@ -9,15 +9,20 @@ import {
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { MagnifyingGlassIcon } from '../../../design-system/components/icons';
+import { createIbanValidationApiAdapter } from '../../api/ValidationApiService';
+import { getIbanValidationViewModel } from './ValidationViewModelService';
 
 export const ValidateIbanPage = () => {
     const [formValues, setFormValues] = useState({ iban: '' });
     const [iban, setIban] = useState(formValues.iban);
     const { data } = useQuery({
         queryKey: ['validation', iban],
+        queryFn: createIbanValidationApiAdapter(iban),
         enabled: Boolean(iban),
         retry: false,
     });
+
+    const ibanValidationModel = getIbanValidationViewModel(data);
 
     return (
         <FocusPageLayout>
@@ -42,7 +47,7 @@ export const ValidateIbanPage = () => {
                     />
                 </FormField>
             </form>
-            <PositiveList items={['x', 'y', 'z']} />
+            {ibanValidationModel.isValidationAvailable && <PositiveList items={[]} />}
         </FocusPageLayout>
     );
 };

@@ -1,6 +1,6 @@
 type Flag = 'INSTANT' | 'POSITIVE_HISTORY' | 'SECURITY_CLAIMS' | 'PSD2';
 
-type ValidationResponse = {
+export type ValidationResponse = {
     iban: string;
     flags: Flag[];
     bank?: {
