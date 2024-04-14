@@ -12,5 +12,9 @@ export const getIbanValidationViewModel = (
         return { isValidationAvailable: false, data: [] };
     }
 
+    if (validation.bank?.trustScore && validation.bank?.trustScore > 7) {
+        return { isValidationAvailable: true, data: ['Trusted bank'] };
+    }
+
     return { isValidationAvailable: true, data: ['Valid IBAN'] };
 };

@@ -43,5 +43,19 @@ describe('validation view model retrieval', () => {
 
             expect(result.data).toEqual(['Valid IBAN']);
         });
+
+        it('return results when iban belongs to trusted bank', () => {
+            const ibanValidationDTOStub = {
+                iban: 'AT0309000000000019176655',
+                flags: [],
+                bank: {
+                    trustScore: 8,
+                },
+            } satisfies ValidationResponse;
+
+            const result = getIbanValidationViewModel(ibanValidationDTOStub);
+
+            expect(result.data).toContain('Trusted bank');
+        });
     });
 });
