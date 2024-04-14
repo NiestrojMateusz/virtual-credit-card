@@ -122,3 +122,9 @@ Test data
 - Example:
 - - Pure: AT0309000000000019176655
 - - Formatted: AT03 0900 0000 0000 1917 6655
+
+6. Overview
+Provide the user with feedback when the IBAN is missing.
+
+    Acceptance criteria
+    1. Display validation message when IBAN is missing
