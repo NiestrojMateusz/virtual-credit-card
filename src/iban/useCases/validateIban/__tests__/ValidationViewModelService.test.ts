@@ -23,4 +23,14 @@ describe('validation view model retrieval', () => {
             expect(result.isValidationAvailable).toBeTruthy();
         });
     });
+
+    describe('validation results', () => {
+        it('return empty when validation is unavailable', () => {
+            const ibanValidationDTOStub = undefined;
+
+            const result = getIbanValidationViewModel(ibanValidationDTOStub);
+
+            expect(result.data).toBe(false);
+        });
+    });
 });
