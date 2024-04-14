@@ -11,5 +11,9 @@ export const getIbanValidationViewModel = (
         return { isValidationAvailable: false };
     }
 
+    if (validation.flags.length) {
+        return { isValidationAvailable: true };
+    }
+
     return {};
 };
